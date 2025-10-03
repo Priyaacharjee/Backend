@@ -39,3 +39,8 @@ model create    ->      collection
 CREATE          ->      document
 
 all mongoose codes are asynchronus.
+
+**Authentication & Authorization**
+1. cookie
+2. bycrypt
+3. jwt
