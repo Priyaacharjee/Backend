@@ -45,31 +45,37 @@ module.exports.loginUser = async function (req, res) {
 
         let user = await userModel.findOne({ email: email });
 
-        if (!user) return res.send("Email or Password Incorrect");
+        if (!user) {
+            return res.status(400).json({ message: "Email or Password Incorrect" });
+        }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (isPasswordValid) {
-            //res.send("your login is successful");
-            let token = generateToken(user);
 
-            res.cookie("token", token, {
-                httpOnly: true,
-                secure: true,         // must be true on HTTPS
-                sameSite: "none",     // required for cross-site cookies
-                path: "/"             // safe default
-            });
-            res.json({ token });
-
-            res.send("login done");
-        } else {
-            res.send("not working");
+        if (!isPasswordValid) {
+            return res.status(400).json({ message: "Email or Password Incorrect" });
         }
-        console.log(isPasswordValid);
+
+        let token = generateToken(user);
+
+        // Set cookie correctly for cross-site (Render -> Vercel)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/"
+        });
+
+        return res.json({
+            message: "Login successful",
+            token
+        });
 
     } catch (err) {
         console.log(err);
+        return res.status(500).json({ message: "Server error" });
     }
-}
+};
+
 
 module.exports.updateProfilePicture = async (req, res) => {
     try {
