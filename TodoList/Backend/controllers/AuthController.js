@@ -54,12 +54,13 @@ module.exports.loginUser = async function (req, res) {
 
             res.cookie("token", token, {
                 httpOnly: true,
-                sameSite: "lax",
-                secure: false,
+                secure: true,         // must be true on HTTPS
+                sameSite: "none",     // required for cross-site cookies
+                path: "/"             // safe default
             });
             res.json({ token });
 
-           res.send("login done");
+            res.send("login done");
         } else {
             res.send("not working");
         }
@@ -105,7 +106,7 @@ module.exports.logoutUser = async (req, res) => {
     try {
         res.cookie("token", "", {
             httpOnly: true,
-            expires: new Date(0) 
+            expires: new Date(0)
         });
 
         res.status(200).json({ message: "Logged out successfully" });
