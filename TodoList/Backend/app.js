@@ -16,7 +16,7 @@ app.use(express.json());
 
 // CORS setup (must come before routes)
 app.use(cors({
-  origin: "https://todolist-tan-delta-83.vercel.app/", // frontend URL
+  origin: "https://todolist-tan-delta-83.vercel.app", // frontend URL
   credentials: true, // allow cookies
 }));
 
