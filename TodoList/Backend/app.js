@@ -4,9 +4,11 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser"); // ✅ correct variable name
+const cookieParser = require("cookie-parser");
 const usersRouter = require("./routes/userRouter");
 const todoRouter = require("./routes/todoRouter");
+
+
 
 // Middleware setup
 app.use(cookieParser());
@@ -19,9 +21,13 @@ app.use(cors({
 }));
 
 // MongoDB connection
-mongoose.connect("mongodb://127.0.0.1:27017/Todolist")
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.error("❌ MongoDB connection error:", err));
+const mongodb = process.env.MONGODB_URI;
+mongoose.connect(mongodb, {
+    dbName: "todolist",
+})
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
 
 // Routes
 app.use("/todo", todoRouter);
