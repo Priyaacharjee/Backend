@@ -24,7 +24,7 @@ const Auth = () => {
     e.preventDefault();
     try {
       console.log("Logging in...");
-      const res = await axios.post("http://localhost:3000/users/login", {
+      const res = await axios.post("https://backend-9p1z.onrender.com/users/login", {
         email: formData.email,
         password: formData.password,
       },
@@ -58,7 +58,7 @@ const Auth = () => {
     setLoading(true);
     try {
       console.log("Signing up...");
-      const res = await axios.post("http://localhost:3000/users/signup", {
+      const res = await axios.post("https://backend-9p1z.onrender.com/users/signup", {
         fullname: formData.fullname,
         email: formData.email,
         password: formData.password,

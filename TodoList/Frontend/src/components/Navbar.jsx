@@ -15,7 +15,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/users/me",
+                const res = await axios.get("https://backend-9p1z.onrender.com/users/me",
                     {
                         withCredentials: true,
 
@@ -41,7 +41,7 @@ const Navbar = () => {
 
             // Upload to backend
             const res = await axios.post(
-                "http://localhost:3000/users/update-picture",
+                "https://backend-9p1z.onrender.com/users/update-picture",
                 formData,
                 {
                     withCredentials: true, // send token cookie
@@ -73,7 +73,7 @@ const Navbar = () => {
         setError(null);
 
         try {
-            await axios.get("http://localhost:3000/users/logout", { withCredentials: true });
+            await axios.get("https://backend-9p1z.onrender.com/users/logout", { withCredentials: true });
 
             localStorage.removeItem("token");
             setUser(null);

@@ -14,7 +14,7 @@ const Home = () => {
 
   const fetchTodos = () => {
     axios
-      .get("http://localhost:3000/todo/get", { withCredentials: true })
+      .get("https://backend-9p1z.onrender.com/todo/get", { withCredentials: true })
       .then((res) => {
         console.log("Fetched Todos:", res.data);
         setTodos(res.data);
@@ -26,7 +26,7 @@ const Home = () => {
   const handleEdit = (id, currentDone) => {
     axios
       .put(
-        `http://localhost:3000/todo/update/${id}`,
+        `https://backend-9p1z.onrender.com/todo/update/${id}`,
         { done: !currentDone }, // send toggled done value
         { withCredentials: true }
       )
@@ -45,7 +45,7 @@ const Home = () => {
   //Deleting a Todo
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/todo/delete/${id}`, { withCredentials: true })
+      .delete(`https://backend-9p1z.onrender.com/todo/delete/${id}`, { withCredentials: true })
       .then(() => {
         // Remove the deleted todo locally, no reload
         setTodos((prev) => prev.filter((todo) => todo._id !== id));

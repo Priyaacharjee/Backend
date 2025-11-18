@@ -11,7 +11,7 @@ function Create({ onTaskAdded }) {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:3000/todo/add", { task },{ withCredentials: true });
+            const res = await axios.post("https://backend-9p1z.onrender.com/todo/add", { task },{ withCredentials: true });
             setMessage(res.data.message);
             setError("");
             setTask("");
